@@ -17,12 +17,23 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
       - name: Get release version
         id: get_version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
       - name: Set package version
-        run: npm version $VERSION --no-git-tag-version
+        run: |
+          # Remove the 'v' prefix if present
+          VERSION_NO_V=${VERSION#v}
+          npm version $VERSION_NO_V --no-git-tag-version
 
       - name: Install dependencies
         run: bun install
@@ -35,6 +46,8 @@ jobs:
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          cache-dependency-path: './package.json'
 
       - name: Publish to NPM
         run: npm publish
