@@ -1,0 +1,58 @@
+{
+  "name": "openapi-splitter",
+  "module": "index.ts",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A CLI tool to split OpenAPI specifications into multiple files",
+  "bin": {
+    "openapi-splitter": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "bun build ./index.ts --outdir ./dist --target node",
+    "prepublishOnly": "bun run build",
+    "prepare": "bun run build",
+    "test": "bun test"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "openapi",
+    "swagger",
+    "split",
+    "api",
+    "specification",
+    "cli"
+  ],
+  "author": "Alisson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alissonsleal/openapi-splitter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alissonsleal/openapi-splitter/issues"
+  },
+  "homepage": "https://github.com/alissonsleal/openapi-splitter#readme",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^10.0.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/js-yaml": "^4.0.9",
+    "commander": "^13.1.0",
+    "fs-extra": "^11.3.0",
+    "js-yaml": "^4.1.0",
+    "mkdirp": "^3.0.1",
+    "swagger-parser": "^10.0.3"
+  }
+}

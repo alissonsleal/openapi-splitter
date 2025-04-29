@@ -1,0 +1,21 @@
+# Source files
+*.ts
+!*.d.ts
+
+# Development and CI files
+test/
+.github/
+.git/
+bun.lockb
+tsconfig.json
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+node_modules/
+openapi-split/
+npm-debug.log
+*.tgz
