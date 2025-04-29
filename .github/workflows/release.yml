@@ -19,7 +19,7 @@ jobs:
 
       - name: Get release version
         id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
       - name: Set package version
         run: npm version $VERSION --no-git-tag-version
