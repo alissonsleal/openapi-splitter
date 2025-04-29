@@ -489,9 +489,15 @@ program
 // Only parse arguments when this file is run directly, not when imported
 // Make it compatible with both Bun and Node.js
 const isBun = typeof globalThis.Bun !== 'undefined'
-if (
+const isMainModule =
   (isBun && import.meta.url === globalThis.Bun.main) ||
-  (!isBun && process.argv[1] === fileURLToPath(import.meta.url))
-) {
+  (!isBun &&
+    // Handle Node.js ESM
+    (process.argv[1] === fileURLToPath(import.meta.url) ||
+      // Handle when run through npx/yarn/pnpm/etc
+      process.argv[1]?.endsWith('/openapi-splitter') ||
+      process.argv[1]?.endsWith('/openapi-splitter/dist/index.js')))
+
+if (isMainModule) {
   program.parse()
 }
