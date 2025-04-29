@@ -15,43 +15,80 @@ A command-line tool to split a single OpenAPI 3.0 specification file (JSON or YA
 - Split tags into separate files
 - Debug mode for troubleshooting
 
-## 📦 Installation
+## 📦 Installation & Usage
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/) runtime installed
+- Node.js 18 or higher
+- Alternatively, [Bun](https://bun.sh/) runtime
 
-### Global installation
+### Quick Use (No Installation Required)
 
-Install the tool globally to use it from anywhere:
+Run the tool directly without installation using package runners:
 
 ```bash
-bun install -g openapi-splitter
+# With npx (npm)
+npx openapi-splitter <file> [options]
+
+# With yarn
+yarn dlx openapi-splitter <file> [options]
+
+# With pnpm
+pnpm dlx openapi-splitter <file> [options]
+
+# With bun
+bunx openapi-splitter <file> [options]
 ```
 
-### Local installation
+### Local Installation
 
-Install as a development dependency in your project:
+If you prefer to use the tool as a project dependency:
 
 ```bash
+# With npm
+npm install --save-dev openapi-splitter
+
+# With yarn
+yarn add --dev openapi-splitter
+
+# With pnpm
+pnpm add --save-dev openapi-splitter
+
+# With bun
 bun install --dev openapi-splitter
 ```
 
-Or clone the repository and install dependencies:
+Then run it via your package.json scripts or local node_modules:
 
 ```bash
-git clone https://github.com/alissonsleal/openapi-splitter.git
-cd openapi-splitter
-bun install
+npx openapi-splitter <file> [options]
 ```
 
-## 🚀 Usage
+### Global Installation
+
+If you use the tool frequently and want it available system-wide:
+
+```bash
+# With npm
+npm install -g openapi-splitter
+
+# With yarn
+yarn global add openapi-splitter
+
+# With pnpm
+pnpm add -g openapi-splitter
+
+# With bun
+bun install -g openapi-splitter
+```
+
+Then use it directly:
 
 ```bash
 openapi-splitter <file> [options]
 ```
 
-### Options
+## 🚀 Command Options
 
 - `-o, --output <directory>`: Output directory (default: "./openapi-split")
 - `-f, --format <format>`: Output format (json or yaml). If not specified, the input format is used
@@ -64,21 +101,24 @@ openapi-splitter <file> [options]
 ### Split a JSON OpenAPI file
 
 ```bash
-openapi-splitter api.json -o ./split-api
+# No installation required!
+npx openapi-splitter api.json -o ./split-api
+
+# Or with other package runners
+pnpm dlx openapi-splitter api.json -o ./split-api
 ```
 
 ### Split a YAML OpenAPI file with specific output format
 
 ```bash
-openapi-splitter api.yaml -o ./split-api -f json
+# Convert YAML input to JSON output
+npx openapi-splitter api.yaml -o ./split-api -f json
 ```
-
-This will convert the YAML input into JSON output files.
 
 ### Enable debug logging
 
 ```bash
-openapi-splitter api.json -o ./split-api --debug
+npx openapi-splitter api.json -o ./split-api --debug
 ```
 
 ## 📁 Directory Structure

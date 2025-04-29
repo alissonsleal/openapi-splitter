@@ -487,9 +487,11 @@ program
   })
 
 // Only parse arguments when this file is run directly, not when imported
+// Make it compatible with both Bun and Node.js
+const isBun = typeof globalThis.Bun !== 'undefined'
 if (
-  import.meta.url === Bun.main ||
-  process.argv[1] === fileURLToPath(import.meta.url)
+  (isBun && import.meta.url === globalThis.Bun.main) ||
+  (!isBun && process.argv[1] === fileURLToPath(import.meta.url))
 ) {
   program.parse()
 }

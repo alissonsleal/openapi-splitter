@@ -5,25 +5,32 @@
 # Ensure the script exits on first error
 set -e
 
-# Create the directory for the script if it doesn't exist
-mkdir -p $(dirname "$0")
-
 echo "Building the package..."
 bun run build
 
 echo "Creating a temporary directory for testing..."
 TEST_DIR=$(mktemp -d)
 
-# Copy the built package to the test directory
+# Copy the built package and necessary files to the test directory
 echo "Copying built package to test directory..."
-cp -r dist package.json README.md $TEST_DIR
+cp -r dist package.json README.md LICENSE* $TEST_DIR 2>/dev/null || :
 
 # Navigate to the test directory
 cd $TEST_DIR
 
+# Remove any build script to avoid rebuilding in the temp dir
+sed -i '/\"build\":/d' package.json
+sed -i '/\"prepare\":/d' package.json
+sed -i '/\"prepublishOnly\":/d' package.json
+
 # Create a package and get its filename
 echo "Creating npm package..."
 PACKAGE_FILENAME=$(npm pack | tail -n 1)
+
+if [ -z "$PACKAGE_FILENAME" ]; then
+  echo "Failed to create package"
+  exit 1
+fi
 
 echo "Created package: $PACKAGE_FILENAME"
 
