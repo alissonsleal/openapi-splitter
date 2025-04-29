@@ -2,7 +2,7 @@
 
 A command-line tool to split a single OpenAPI 3.0 specification file (JSON or YAML) into multiple files and folders with proper references, making your API specs more maintainable and easier to work with.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![CI](https://github.com/alissonsleal/openapi-splitter/actions/workflows/ci.yml/badge.svg)](https://github.com/alissonsleal/openapi-splitter/actions/workflows/ci.yml)
 
 ## ✨ Features
 
